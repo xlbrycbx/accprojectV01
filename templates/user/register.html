@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>NJF ACC Management System</title>
+    <meta name="description" content="这是一个 index 页面">
+    <meta name="keywords" content="index">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <link rel="icon" type="image/png" href="../../static/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="../../static/i/app-icon72x72@2x.png">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
+    <link rel="stylesheet" href="../../static/css/amazeui.min.css"/>
+    <link rel="stylesheet" href="../../static/css/amazeui.datatables.min.css"/>
+    <link rel="stylesheet" href="../../static/css/app.css">
+    <script src="../../static/js/jquery.min.js"></script>
+
+</head>
+
+<body data-type="login">
+<script src="../../static/js/theme.js"></script>
+<div class="am-g tpl-g">
+    <!-- 风格切换 -->
+    <div class="tpl-skiner">
+        <div class="tpl-skiner-toggle am-icon-cog">
+        </div>
+        <div class="tpl-skiner-content">
+
+            <div class="tpl-skiner-content-bar">
+                <span class="skiner-color skiner-white" data-color="theme-white"></span>
+                <span class="skiner-color skiner-black" data-color="theme-black"></span>
+            </div>
+        </div>
+    </div>
+    <div class="tpl-login" style="margin: 0 auto;width: 600px">
+        <div class="tpl-login-content">
+            <div class="tpl-login-title" style="font-size: 20px;margin-bottom: 10px"><h2>用户注册</h2></div>
+
+
+
+            <form class="am-form tpl-form-line-form" action="{{ url_for('user.register') }}" method="post">
+
+
+                <div class="am-form-group">
+                    <input type="text" class="tpl-form-input" id="user-name" placeholder="用户名" name="username"><span></span>
+                </div>
+
+                <div class="am-form-group">
+                    <input type="password" class="tpl-form-input" id="password" placeholder="请输入密码" name="password">
+                </div>
+
+                <div class="am-form-group">
+                    <input type="password" class="tpl-form-input" id="repassword" placeholder="再次输入密码" name="repassword"><span style="color: red">{{ msg }}</span>
+                </div>
+
+
+
+
+                <div class="am-form-group" >
+
+                    <input type="submit" id="submit"
+                            class="am-btn am-btn-primary  am-btn-block tpl-btn-bg-color-success  tpl-login-btn" >
+
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="../../static/js/amazeui.min.js"></script>
+<script src="../../static/js/app.js"></script>
+<script>
+    $('#user-name').blur(function (){
+        let username =$(this).val();
+        let alinf = $(this).next();
+        alinf.text('')
+        $.get('{{ url_for('user.check_username') }}',{username:username},function (data){
+            if (data.code!==200){
+                alinf.css({'color':'red','font-size':'12px'})
+                alinf.text(data.msg)
+                $('#password').attr('disabled',true)
+
+            }else {
+                $('#password').attr('disabled',false)
+            }
+        })
+
+    })
+
+    $('#user-name').focus(function (){
+      $('#repassword').next().text('')
+    })
+
+</script>
+</body>
+
+</html>
