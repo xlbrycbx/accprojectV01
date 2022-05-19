@@ -9,7 +9,7 @@ user_bp = Blueprint('user', __name__, url_prefix='/user')
 
 @user_bp.route('/')
 def index():
-    return render_template('user/../../templates/index.html')
+    return render_template('user/index.html')
 
 
 @user_bp.route('/register', methods=['POST', 'GET'])
