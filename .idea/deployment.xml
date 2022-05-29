@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" remoteFilesAllowedToDisappearOnAutoupload="false">
+  <component name="PublishConfigData" serverName="root@1.13.169.117:22 (2)" remoteFilesAllowedToDisappearOnAutoupload="false">
     <serverData>
       <paths name="root@1.13.169.117:22">
         <serverdata>
           <mappings>
             <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="root@1.13.169.117:22 (2)">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/myproject/accV01" local="$PROJECT_DIR$" />
           </mappings>
         </serverdata>
       </paths>

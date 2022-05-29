@@ -1,6 +1,6 @@
 
 class Config:
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///C:/sqlite/sqlite-tools-win32-x86-3380500/accV01.db'
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://mofinscmadmin:NAMAt67oCEgu@47.98.143.6:6301/mofin-scmsys'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_ECHO = True
     SECRET_KEY = 'sldjfkdjkfjdkfjkdf'

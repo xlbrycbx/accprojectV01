@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="accV01.db" uuid="c630ecd3-e847-4164-8eda-6ceb822646dc">
-      <driver-ref>sqlite.xerial</driver-ref>
+    <data-source source="LOCAL" name="mofin-scmsys@47.98.143.6" uuid="5e22d529-5dfb-4dc1-8a6b-c173b432c58c">
+      <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
-      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/../../../../sqlite/sqlite-tools-win32-x86-3380500/accV01.db</jdbc-url>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://47.98.143.6:6301/mofin-scmsys</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
