@@ -1,5 +1,6 @@
 import xlrd as xlrd
 from flask import Blueprint, request, render_template, jsonify, session, redirect, url_for
+from sqlalchemy import or_, and_
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from apps.product.models import Product, Product_supplier, Supplier
@@ -204,7 +205,7 @@ def product_supplier_delete():
     supplierCode = request.args.get('supplierCode')
     itemCode = request.args.get('itemCode')
     product_supplier = Product_supplier.query.filter(
-        (Product_supplier.itemCode == itemCode) & (Product_supplier.supplierCode == supplierCode)).first()
+        and_(Product_supplier.itemCode == itemCode, Product_supplier.supplierCode == supplierCode)).first()
     db.session.delete(product_supplier)
     db.session.commit()
     product_suppliers = Product_supplier.query.all()
