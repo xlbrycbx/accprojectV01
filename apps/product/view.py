@@ -115,14 +115,14 @@ def supplier():
             if not supplier.isdelete:
                 msg = f'供应商{supplierCode}已存在'
             else:
-                supplier.isdelete=False
+                supplier.isdelete = False
                 supplier.supplierName = supplierName
                 supplier.contactPerson = contactPerson
                 supplier.phone = phone
                 supplier.email = email
                 db.session.commit()
-            suppliers = Supplier.query.filter(Supplier.isdelete==False).all()
-            return render_template('supplier.html',suppliers=suppliers,msg=msg)
+            suppliers = Supplier.query.filter(Supplier.isdelete == False).all()
+            return render_template('supplier.html', suppliers=suppliers, msg=msg)
 
         else:
             supplier = Supplier()
@@ -135,20 +135,18 @@ def supplier():
             db.session.add(supplier)
             db.session.commit()
 
-
-
         return redirect(url_for('product.supplier'))
 
     else:
-        suppliers = Supplier.query.filter(Supplier.isdelete==False)
-        return render_template('supplier.html',suppliers=suppliers,msg=msg)
+        suppliers = Supplier.query.filter(Supplier.isdelete == False)
+        return render_template('supplier.html', suppliers=suppliers, msg=msg)
 
-@product_bp.route('/update',methods=['POST','GET'])
+
+@product_bp.route('/update', methods=['POST', 'GET'])
 def supplier_update():
     if request.method == 'POST':
 
         supplierCode = request.form.get('supplierCode')
-
 
         supplierName = request.form.get('supplierName')
         contactPerson = request.form.get('contactPerson')
@@ -168,33 +166,46 @@ def supplier_update():
         # supplier = Supplier.query.filter(Supplier.supplierCode==supplierCode).first()
         supplier = Supplier.query.get(supplierCode)
 
+        return render_template('updatesupplier.html', supplier=supplier)
 
-        return render_template('updatesupplier.html',supplier=supplier)
 
 @product_bp.route('/delete')
 def supplier_delete():
-
-
     supplierCode = request.args.get('supplierCode')
-
 
     supplier = Supplier.query.get(supplierCode)
     supplier.isdelete = True
     db.session.commit()
     return redirect(url_for('product.supplier'))
 
-@product_bp.route('/product_supplier',methods=['POST','GET'])
+
+@product_bp.route('/product_supplier', methods=['POST', 'GET'])
 def product_supplier():
     if request.method == 'POST':
         itemCode = request.form.get('itemCode')
         supplierCode = request.form.get('supplierCode')
 
-        product_supplier=Product_supplier()
+        product_supplier = Product_supplier()
         product_supplier.itemCode = itemCode
         product_supplier.supplierCode = supplierCode
         db.session.add(product_supplier)
         db.session.commit()
+        product_suppliers = Product_supplier.query.all()
+        return render_template('product_supplier.html', product_suppliers=product_suppliers)
 
     else:
-        return render_template('product_supplier.html')
 
+        product_suppliers = Product_supplier.query.all()
+        return render_template('product_supplier.html', product_suppliers=product_suppliers)
+
+
+@product_bp.route('/product_supplier_delete')
+def product_supplier_delete():
+    supplierCode = request.args.get('supplierCode')
+    itemCode = request.args.get('itemCode')
+    product_supplier = Product_supplier.query.filter(
+        (Product_supplier.itemCode == itemCode) & (Product_supplier.supplierCode == supplierCode)).first()
+    db.session.delete(product_supplier)
+    db.session.commit()
+    product_suppliers = Product_supplier.query.all()
+    return render_template('product_supplier.html', product_suppliers=product_suppliers)

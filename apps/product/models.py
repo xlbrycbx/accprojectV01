@@ -35,4 +35,5 @@ class Product_supplier(db.Model):
 
     supplierCode = db.Column(db.String(10),db.ForeignKey('supplier.supplierCode'),nullable =False)
     itemCode = db.Column(db.String(7),db.ForeignKey('product.itemCode'),nullable =False)
-
+    supplier = db.relationship('Supplier',backref='product_suppliers')
+    product = db.relationship('Product',backref='product_suppliers')

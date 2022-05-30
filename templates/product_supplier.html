@@ -119,19 +119,24 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                         </ul>
                         <!-- //nav-second-level -->
                     </li>
-                    <li>
-                        <a href="{{ url_for('product.product') }}"><i class="fa fa-table nav_icon"></i>产品信息 <span
-                                class="nav-badge">05</span></a>
+
+                    <li class="">
+                        <a href="#"><i class="fa fa-book nav_icon"></i>产品信息 <span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li>
+                                <a href="{{ url_for('product.product_supplier') }}">产品-供应商<span
+                                        class="nav-badge-btm">08</span></a>
+                            </li>
+                            <li>
+                                <a href="{{ url_for('product.product') }}">产品列表</a>
+                            </li>
+                        </ul>
+                        <!-- /nav-second-level -->
                     </li>
 
                     <li>
                         <a href="{{ url_for('product.supplier') }}"><i class="fa fa-table nav_icon"></i>供应商信息 </a>
                     </li>
-
-                    <li>
-                        <a href="{{ url_for('product.supplier') }}"><i class="fa fa-table nav_icon"></i>供应商-产品 </a>
-                    </li>
-
 
                     <li>
                         <a href="#"><i class="fa fa-check-square-o nav_icon"></i>Forms<span
@@ -235,47 +240,67 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
     </div>
     <div id="page-wrapper">
         <div class="main-page">
-            <div class="tables"><h4 class="title1" style="color: #E94E02">供应商管理</h4>
+{#            这个鬼东西不能删，删了左边导航栏的折叠按钮就不起作用了#}
+            <div class="row calender widget-shadow" style="display: none">
+
+                <div class="cal1">
+
+                </div>
+            </div>
+            <div class="tables"><h4 class="title1" style="color: #E94E02">产品-供应商</h4>
 
 
                 <div class="bs-example widget-shadow" data-example-id="hoverable-table">
                     <span style="color: red">{{ msg }}</span>
-                    <h4 style="font-size: 18px">供应商列表:</h4>
+                    <h4 style="font-size: 18px">产品-供应商:</h4>
                     <form action="{{ url_for('product.product_supplier') }}" method="post">
-                        <table class="table table-bordered">
+                        <table class="table table-hover">
                             <thead>
                             <tr>
                                 <th>#</th>
+
                                 <th>Item Code</th>
+                                <th>model Label</th>
+
                                 <th>Supplier Code</th>
+                                <th>Supplier Name</th>
+
+                                <th>编辑</th>
 
 
                             </tr>
                             </thead>
                             <tbody>
                             {% for product_supplier in product_suppliers %}
-                                <tr>
+                                <tr id="listdata">
                                     <th scope="row">{{ loop.index }}</th>
+
                                     <td>{{ product_supplier.itemCode }}</td>
+                                    <td>{{ product_supplier.product.modelLable }}</td>
+
                                     <td>{{ product_supplier.supplierCode }}</td>
+                                    <td>{{ product_supplier.supplier.supplierName }}</td>
 
+                                    <td class="edit"><a
+                                            href="{{ url_for('product.product_supplier_delete') }}?supplierCode={{ product_supplier.supplierCode }}&itemCode={{ product_supplier.itemCode }}">删除</a>
+                                    </td>
 
-
-
-
-                                </tr>
-
-                                <tr id="addsup">
-                                    <th scope="row">*</th>
-
-
-                                    <td><input type="text" name="itemCode" placeholder="itemCode"></td>
-                                    <td><input type="text" name="supplierCode" placeholder="supplierCode"></td>
-
-
-                                    <td style="font-size: 20px"><input type="submit" value="+"></td>
                                 </tr>
                             {% endfor %}
+                            {#                       <div id="add">+</div>#}
+
+
+                            <tr id="addsup">
+                                <th scope="row">*</th>
+
+
+                                <td><input type="text" name="itemCode" placeholder="itemCode"></td>
+                                <td><input type="text" name="supplierCode" placeholder="supplierCode"></td>
+
+
+                                <td style="font-size: 20px"><input type="submit" value="+"></td>
+                            </tr>
+
                             </tbody>
                         </table>
                     </form>
